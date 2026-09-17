@@ -1,0 +1,7 @@
+{
+  "name": "A cola da Gil",
+  "description": "A cola da Gil - A força da mulher. Consulta rápida dos números para Presidente, Governador, Senadores e Deputados, com opção de personalização, impressão para a urna e funcionamento offline.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

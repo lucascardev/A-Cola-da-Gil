@@ -1,0 +1,38 @@
+import type { MetadataRoute } from 'next';
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    id: '/',
+    name: 'A cola da Gil - A força da mulher',
+    short_name: 'Cola da Gil',
+    description: 'A cola da Gil - A força da mulher. Seus números de voto para consulta rápida, personalização e impressão para a urna.',
+    start_url: '/',
+    scope: '/',
+    display: 'standalone',
+    background_color: '#ffffff',
+    theme_color: '#ff28b4',
+    orientation: 'portrait-primary',
+    categories: ['elections', 'utilities', 'productivity'],
+    lang: 'pt-BR',
+    icons: [
+      {
+        src: '/pwa-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
+        purpose: 'any',
+      },
+      {
+        src: '/pwa-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: 'any',
+      },
+      {
+        src: '/pwa-maskable-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: 'maskable',
+      },
+    ],
+  };
+}
