@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'A cola da Gil - A força da mulher',
-  description: 'A cola da Gil - A força da mulher. Consulta rápida dos números para Presidente, Governador, Senadores e Deputados, com opção de personalização, impressão para a urna e funcionamento offline.',
+  description: 'A cola da Gil - A força da mulher. Consulta rápida dos números para Governador, Senadores e Deputados, com opção de personalização, impressão para a urna e funcionamento offline.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'A cola da Gil - A força da mulher',
-    description: 'Consulte os números de voto da Gil para Presidente, Governador, Senadores e Deputados, ou crie a sua cola personalizada!',
+    description: 'Consulte os números de voto da Gil para Governador, Senadores e Deputados, ou crie a sua cola personalizada!',
     type: 'website',
     locale: 'pt_BR',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'A cola da Gil - A força da mulher',
-    description: 'Consulte os números de voto da Gil para Presidente, Governador, Senadores e Deputados.',
+    description: 'Consulte os números de voto da Gil para Governador, Senadores e Deputados.',
   },
 };
 

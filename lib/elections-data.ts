@@ -70,20 +70,9 @@ export const GIL_DEFAULT_CANDIDATES: Candidate[] = [
     party: 'União Brasil (Vice Zé Coca)',
     notes: 'Para transformar o governo do Estado.',
   },
-  {
-    id: 'presidente',
-    role: 'Presidente da República',
-    roleShort: 'Presidente',
-    order: 6,
-    digits: 2,
-    number: '22',
-    name: 'Presidente 22',
-    party: 'PL',
-    notes: 'Eleição para Presidente da República.',
-  },
 ];
 
-export const STORAGE_KEY = 'a_cola_da_gil_custom_v1';
+export const STORAGE_KEY = 'a_cola_da_gil_custom_v2';
 
 // Data oficial da eleição fixada internamente no sistema: 4 de outubro de 2026 às 08:00
 export const OFFICIAL_ELECTION_DATE = '2026-10-04T08:00';

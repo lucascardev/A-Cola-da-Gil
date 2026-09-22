@@ -44,7 +44,7 @@ function getCandidatesSnapshot(): Candidate[] {
   try {
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      cachedCandidates = parsed;
+      cachedCandidates = parsed.filter((c: Candidate) => c.id !== 'presidente');
       return cachedCandidates;
     }
   } catch {
