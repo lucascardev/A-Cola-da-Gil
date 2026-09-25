@@ -1,0 +1,85 @@
+{
+  "slug": "coladomarcos",
+  "title": "A Cola do Marcos",
+  "slogan": "Coragem para Mudar",
+  "badge": "Liderança e Ação",
+  "description": "Números da chapa do Marcos para as eleições 2026. Imprima sua colinha de bolso.",
+  "colors": {
+    "primary": "#059669",
+    "primaryHover": "#047857",
+    "lightBg": "#ecfdf5",
+    "border": "#a7f3d0"
+  },
+  "showPresident": true,
+  "footerNote": "A cola do Marcos • Coragem para Mudar • Marcos 2222 (Dep. Federal)",
+  "candidates": [
+    {
+      "id": "deputado-federal",
+      "role": "Deputado Federal",
+      "roleShort": "Dep. Federal",
+      "order": 1,
+      "digits": 4,
+      "number": "2222",
+      "name": "Marcos Oliveira",
+      "party": "PL",
+      "badge": "Destaque Principal ★ Coragem e Trabalho",
+      "isMainHighlight": true,
+      "notes": "Representante no Congresso Nacional."
+    },
+    {
+      "id": "deputado-estadual",
+      "role": "Deputado Estadual",
+      "roleShort": "Dep. Estadual",
+      "order": 2,
+      "digits": 5,
+      "number": "22123",
+      "name": "Dra. Luciana Ramos",
+      "party": "PL",
+      "notes": "Pela saúde e segurança da nossa gente."
+    },
+    {
+      "id": "senador-1",
+      "role": "Senador (1ª Vaga)",
+      "roleShort": "Senador 1",
+      "order": 3,
+      "digits": 3,
+      "number": "222",
+      "name": "João Roma",
+      "party": "PL",
+      "notes": "Pelo Senado Federal."
+    },
+    {
+      "id": "senador-2",
+      "role": "Senador (2ª Vaga)",
+      "roleShort": "Senador 2",
+      "order": 4,
+      "digits": 3,
+      "number": "111",
+      "name": "Capitão Alden",
+      "party": "PL",
+      "notes": "Segunda vaga para o Senado Federal."
+    },
+    {
+      "id": "governador",
+      "role": "Governador",
+      "roleShort": "Governador",
+      "order": 5,
+      "digits": 2,
+      "number": "22",
+      "name": "Candidato do Partido",
+      "party": "PL",
+      "notes": "Governo do Estado."
+    },
+    {
+      "id": "presidente",
+      "role": "Presidente da República",
+      "roleShort": "Presidente",
+      "order": 6,
+      "digits": 2,
+      "number": "22",
+      "name": "Jair Messias Bolsonaro",
+      "party": "PL",
+      "notes": "Presidência da República."
+    }
+  ]
+}

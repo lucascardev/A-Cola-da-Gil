@@ -1,0 +1,74 @@
+{
+  "slug": "coladagil",
+  "title": "A Cola da Gil Tavares",
+  "slogan": "Mulher em ação",
+  "badge": "Mulher em ação",
+  "description": "Números para a urna eletrônica. Imprima sua colinha em papel para levar no dia do voto.",
+  "colors": {
+    "primary": "#ff28b4",
+    "primaryHover": "#e01f9c",
+    "lightBg": "#fdf2f8",
+    "border": "#fce7f3"
+  },
+  "showPresident": false,
+  "footerNote": "A cola da Gil Tavares • Mulher em ação • Cibele 4478 (Dep. Federal)",
+  "candidates": [
+    {
+      "id": "deputado-federal",
+      "role": "Deputada Federal",
+      "roleShort": "Dep. Federal",
+      "order": 1,
+      "digits": 4,
+      "number": "4478",
+      "name": "Cibele de Teobaldo",
+      "party": "União Brasil",
+      "badge": "Destaque Principal ★ Mulher em ação",
+      "isMainHighlight": true,
+      "notes": "Candidata de destaque da Gil Tavares. Representante da força feminina."
+    },
+    {
+      "id": "deputado-estadual",
+      "role": "Deputado Estadual",
+      "roleShort": "Dep. Estadual",
+      "order": 2,
+      "digits": 5,
+      "number": "44000",
+      "name": "Pedro Tavares",
+      "party": "União Brasil",
+      "notes": "Trabalho e dedicação pela Bahia."
+    },
+    {
+      "id": "senador-1",
+      "role": "Senador (1ª Vaga)",
+      "roleShort": "Senador 1",
+      "order": 3,
+      "digits": 3,
+      "number": "100",
+      "name": "Angelo Coronel",
+      "party": "PSD",
+      "notes": "Primeiro voto para o Senado Federal."
+    },
+    {
+      "id": "senador-2",
+      "role": "Senador (2ª Vaga)",
+      "roleShort": "Senador 2",
+      "order": 4,
+      "digits": 3,
+      "number": "222",
+      "name": "João Roma",
+      "party": "PL",
+      "notes": "Segundo voto para o Senado Federal."
+    },
+    {
+      "id": "governador",
+      "role": "Governador",
+      "roleShort": "Governador",
+      "order": 5,
+      "digits": 2,
+      "number": "44",
+      "name": "ACM Neto",
+      "party": "União Brasil (Vice Zé Coca)",
+      "notes": "Para transformar o governo do Estado."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Candidate } from '@/lib/elections-data';
+import { Candidate, CampaignConfig } from '@/lib/campaigns';
 import { trackPrintClick } from '@/lib/analytics';
 import { Printer, X, Scissors, Info } from 'lucide-react';
 
@@ -9,17 +9,19 @@ interface PrintableColaProps {
   candidates: Candidate[];
   isOpen: boolean;
   onClose: () => void;
+  campaign: CampaignConfig;
 }
 
 export const PrintableCola: React.FC<PrintableColaProps> = ({
   candidates,
   isOpen,
   onClose,
+  campaign,
 }) => {
   if (!isOpen) return null;
 
   const handlePrint = () => {
-    trackPrintClick('modal');
+    trackPrintClick('modal', campaign.slug, campaign.title);
     window.print();
   };
 
@@ -32,13 +34,17 @@ export const PrintableCola: React.FC<PrintableColaProps> = ({
         {/* Modal Controls (Hidden in Print) */}
         <div className="flex items-center justify-between bg-slate-900 text-white px-5 py-3.5 print:hidden">
           <div className="flex items-center gap-2">
-            <Printer className="w-4 h-4 text-[#ff28b4]" />
+            <Printer
+              className="w-4 h-4"
+              style={{ color: campaign.colors.primary }}
+            />
             <h3 className="text-sm font-bold">Impressão da Colinha Eleitoral</h3>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 bg-[#ff28b4] hover:bg-[#e01f9c] text-white px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer"
+              style={{ backgroundColor: campaign.colors.primary }}
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Imprimir Agora</span>
@@ -54,8 +60,17 @@ export const PrintableCola: React.FC<PrintableColaProps> = ({
         </div>
 
         {/* Informative notice on top (Hidden in Print) */}
-        <div className="bg-pink-50 border-b border-pink-100 p-3 text-xs text-slate-700 flex items-start gap-2.5 print:hidden">
-          <Info className="w-4 h-4 text-[#ff28b4] flex-shrink-0 mt-0.5" />
+        <div
+          className="border-b p-3 text-xs text-slate-700 flex items-start gap-2.5 print:hidden"
+          style={{
+            backgroundColor: campaign.colors.lightBg,
+            borderBottomColor: campaign.colors.border,
+          }}
+        >
+          <Info
+            className="w-4 h-4 flex-shrink-0 mt-0.5"
+            style={{ color: campaign.colors.primary }}
+          />
           <p>
             <strong>Regra Eleitoral do TSE:</strong> O uso de aparelho celular na cabina de votação é proibido pela Justiça Eleitoral. No entanto, a <strong>colinha em papel é 100% permitida e incentivada</strong>! Imprima e dobre no seu bolso.
           </p>
@@ -76,11 +91,11 @@ export const PrintableCola: React.FC<PrintableColaProps> = ({
               <div className="inline-block px-3 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-black uppercase tracking-wider mb-1">
                 Colinha Eleitoral Oficial
               </div>
-              <h2 className="text-2xl font-black tracking-tight text-slate-900">
-                A COLA DA GIL
+              <h2 className="text-2xl font-black tracking-tight text-slate-900 uppercase">
+                {campaign.title}
               </h2>
               <p className="text-xs font-bold text-slate-700 uppercase tracking-widest">
-                A Força da Mulher
+                {campaign.slogan}
               </p>
               <p className="text-[10px] text-slate-500 mt-0.5">
                 Consulte a ordem correta para digitar na urna eletrônica
@@ -99,7 +114,7 @@ export const PrintableCola: React.FC<PrintableColaProps> = ({
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-slate-900 text-white text-[11px] font-black flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-slate-900 text-white text-[11px] font-black flex items-center justify-center flex-shrink-0">
                       {item.order}
                     </span>
                     <div>
@@ -116,7 +131,7 @@ export const PrintableCola: React.FC<PrintableColaProps> = ({
                   </div>
 
                   {/* Big bold number */}
-                  <div className="text-right">
+                  <div className="text-right flex-shrink-0">
                     <span className="inline-block px-3 py-1 bg-slate-900 text-white font-black text-lg sm:text-xl tracking-widest rounded-md">
                       {item.number}
                     </span>
@@ -132,8 +147,8 @@ export const PrintableCola: React.FC<PrintableColaProps> = ({
 
             {/* Footer on Colinha */}
             <div className="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-[10px] text-slate-500">
-              <span>A cola da Gil • A força da mulher</span>
-              <span>Cibele 4478 • Dep. Federal</span>
+              <span>{campaign.footerNote || `${campaign.title} • ${campaign.slogan}`}</span>
+              <span>Eleições 2026</span>
             </div>
           </div>
         </div>
@@ -148,7 +163,8 @@ export const PrintableCola: React.FC<PrintableColaProps> = ({
           </button>
           <button
             onClick={handlePrint}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-[#ff28b4] hover:bg-[#e01f9c] rounded-lg shadow-sm transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white rounded-lg shadow-sm transition-colors cursor-pointer"
+            style={{ backgroundColor: campaign.colors.primary }}
           >
             <Printer className="w-3.5 h-3.5" />
             <span>Imprimir / Salvar em PDF</span>

@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Candidate } from '@/lib/elections-data';
+import { Candidate, CampaignTheme } from '@/lib/campaigns';
 import { Edit3, Check, RotateCcw, AlertCircle, Star } from 'lucide-react';
 
 interface CandidateCardProps {
   candidate: Candidate;
   isModified: boolean;
+  colors?: CampaignTheme;
+  campaignTitle?: string;
   onUpdate: (updated: Partial<Candidate>) => void;
   onResetOne: () => void;
 }
@@ -14,6 +16,13 @@ interface CandidateCardProps {
 export const CandidateCard: React.FC<CandidateCardProps> = ({
   candidate,
   isModified,
+  colors = {
+    primary: '#ff28b4',
+    primaryHover: '#e01f9c',
+    lightBg: '#fdf2f8',
+    border: '#fce7f3',
+  },
+  campaignTitle = 'A Cola',
   onUpdate,
   onResetOne,
 }) => {
@@ -58,9 +67,19 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
       id={`card-${candidate.id}`}
       className={`rounded-2xl transition-all ${
         candidate.isMainHighlight
-          ? 'bg-pink-50/50 border-2 border-[#ff28b4] shadow-md shadow-pink-500/10'
+          ? 'shadow-md'
           : 'bg-white border border-slate-200 shadow-xs'
       } p-4 sm:p-5`}
+      style={
+        candidate.isMainHighlight
+          ? {
+              backgroundColor: colors.lightBg,
+              borderColor: colors.primary,
+              borderWidth: 2,
+              boxShadow: `0 4px 20px ${colors.primary}18`,
+            }
+          : undefined
+      }
     >
       {!isEditing ? (
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -71,9 +90,12 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
                 {candidate.role}
               </span>
               {candidate.isMainHighlight && (
-                <span className="inline-flex items-center gap-1 text-[11px] font-black bg-[#ff28b4] text-white px-2 py-0.5 rounded-full">
+                <span
+                  className="inline-flex items-center gap-1 text-[11px] font-black text-white px-2 py-0.5 rounded-full"
+                  style={{ backgroundColor: colors.primary }}
+                >
                   <Star className="w-3 h-3 fill-white" />
-                  <span>Destaque da Gil</span>
+                  <span>{candidate.badge || `Destaque de ${campaignTitle}`}</span>
                 </span>
               )}
               {isModified && (
@@ -87,7 +109,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
               {candidate.name}
             </div>
 
-            <div className="text-xs font-semibold text-slate-400">
+            <div className="text-xs font-semibold text-slate-500">
               {candidate.party}
             </div>
           </div>
@@ -100,9 +122,17 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
                   key={index}
                   className={`w-11 h-14 sm:w-12 sm:h-16 rounded-xl flex items-center justify-center text-2xl sm:text-3xl font-black shadow-sm border-2 ${
                     candidate.isMainHighlight
-                      ? 'bg-[#ff28b4] text-white border-[#ff28b4]'
+                      ? 'text-white'
                       : 'bg-slate-900 text-white border-slate-900'
                   }`}
+                  style={
+                    candidate.isMainHighlight
+                      ? {
+                          backgroundColor: colors.primary,
+                          borderColor: colors.primary,
+                        }
+                      : undefined
+                  }
                 >
                   {d}
                 </div>
@@ -113,7 +143,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
             <div className="flex flex-col items-center gap-1">
               <button
                 onClick={() => setIsEditing(true)}
-                className="text-slate-400 hover:text-[#ff28b4] p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+                className="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
                 title="Editar número ou nome"
               >
                 <Edit3 className="w-4 h-4" />
@@ -122,7 +152,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
                 <button
                   onClick={onResetOne}
                   className="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
-                  title="Restaurar número original da Gil"
+                  title="Restaurar número original"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                 </button>
@@ -132,7 +162,10 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
         </div>
       ) : (
         /* Simple Edit Form */
-        <div className="space-y-3 bg-white p-3 rounded-xl border border-pink-200">
+        <div
+          className="space-y-3 bg-white p-3 rounded-xl border"
+          style={{ borderColor: colors.border }}
+        >
           <div className="text-xs font-bold text-slate-700">
             Modificar voto para {candidate.role}:
           </div>
@@ -155,7 +188,8 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
                 maxLength={candidate.digits}
                 value={editNumber}
                 onChange={(e) => setEditNumber(e.target.value.replace(/\D/g, ''))}
-                className="w-full text-base font-black tracking-widest text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-hidden focus:ring-2 focus:ring-[#ff28b4]"
+                className="w-full text-base font-black tracking-widest text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-hidden focus:ring-2"
+                style={{ outlineColor: colors.primary }}
               />
             </div>
 
@@ -167,7 +201,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
                 type="text"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
-                className="w-full text-xs font-semibold text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-2 focus:outline-hidden focus:ring-2 focus:ring-[#ff28b4]"
+                className="w-full text-xs font-semibold text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-2 focus:outline-hidden focus:ring-2"
               />
             </div>
 
@@ -179,7 +213,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
                 type="text"
                 value={editParty}
                 onChange={(e) => setEditParty(e.target.value)}
-                className="w-full text-xs font-semibold text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-2 focus:outline-hidden focus:ring-2 focus:ring-[#ff28b4]"
+                className="w-full text-xs font-semibold text-slate-900 bg-white border border-slate-300 rounded-lg px-3 py-2 focus:outline-hidden focus:ring-2"
               />
             </div>
           </div>
@@ -193,7 +227,8 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
             </button>
             <button
               onClick={handleSave}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#ff28b4] hover:bg-[#db1096] px-3.5 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-white px-3.5 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer"
+              style={{ backgroundColor: colors.primary }}
             >
               <Check className="w-3.5 h-3.5" />
               <span>Salvar</span>

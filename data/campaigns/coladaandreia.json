@@ -1,0 +1,85 @@
+{
+  "slug": "coladaandreia",
+  "title": "A Cola da Andréia",
+  "slogan": "Compromisso, Trabalho e Renovação",
+  "badge": "Juntos por um Futuro Melhor",
+  "description": "Consulte e imprima os números de voto da Andréia para levar no dia da eleição.",
+  "colors": {
+    "primary": "#2563eb",
+    "primaryHover": "#1d4ed8",
+    "lightBg": "#eff6ff",
+    "border": "#bfdbfe"
+  },
+  "showPresident": true,
+  "footerNote": "A cola da Andréia • Compromisso e Renovação • Andréia 1515 (Dep. Federal)",
+  "candidates": [
+    {
+      "id": "deputado-federal",
+      "role": "Deputada Federal",
+      "roleShort": "Dep. Federal",
+      "order": 1,
+      "digits": 4,
+      "number": "1515",
+      "name": "Andréia Santos",
+      "party": "MDB",
+      "badge": "Destaque Principal ★ A Força da Mudança",
+      "isMainHighlight": true,
+      "notes": "Candidata de destaque da Andréia. Por mais saúde e educação."
+    },
+    {
+      "id": "deputado-estadual",
+      "role": "Deputado Estadual",
+      "roleShort": "Dep. Estadual",
+      "order": 2,
+      "digits": 5,
+      "number": "15123",
+      "name": "Marcos Silveira",
+      "party": "MDB",
+      "notes": "Voz ativa na Assembleia Legislativa."
+    },
+    {
+      "id": "senador-1",
+      "role": "Senador (1ª Vaga)",
+      "roleShort": "Senador 1",
+      "order": 3,
+      "digits": 3,
+      "number": "150",
+      "name": "Carlos Eduardo",
+      "party": "MDB",
+      "notes": "Defesa intransigente do nosso Estado."
+    },
+    {
+      "id": "senador-2",
+      "role": "Senador (2ª Vaga)",
+      "roleShort": "Senador 2",
+      "order": 4,
+      "digits": 3,
+      "number": "400",
+      "name": "Valéria Mendes",
+      "party": "PSB",
+      "notes": "Compromisso social e desenvolvimento sustentável."
+    },
+    {
+      "id": "governador",
+      "role": "Governador",
+      "roleShort": "Governador",
+      "order": 5,
+      "digits": 2,
+      "number": "13",
+      "name": "Jerônimo Rodrigues",
+      "party": "PT (Coligação Bahia pela Frente)",
+      "notes": "Avançando no desenvolvimento do Estado."
+    },
+    {
+      "id": "presidente",
+      "role": "Presidente da República",
+      "roleShort": "Presidente",
+      "order": 6,
+      "digits": 2,
+      "number": "13",
+      "name": "Luiz Inácio Lula da Silva",
+      "party": "PT",
+      "notes": "Eleição presidencial 2026."
+    }
+  ]
+}
