@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Candidate, CampaignConfig } from '@/lib/campaigns';
+import { Candidate, CampaignConfig } from '@/lib/campaign-types';
 import { trackPrintClick } from '@/lib/analytics';
 import { Printer, X, Scissors, Info } from 'lucide-react';
 

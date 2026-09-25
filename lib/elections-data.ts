@@ -1,9 +1,9 @@
-import { Candidate, getDefaultCampaign } from './campaigns';
+import { Candidate, generatePersonalColinha } from './campaign-types';
 
-export type { Candidate } from './campaigns';
+export type { Candidate } from './campaign-types';
 
-// Mantém retrocompatibilidade para componentes existentes
-export const GIL_DEFAULT_CANDIDATES: Candidate[] = getDefaultCampaign().candidates;
+// Mantém retrocompatibilidade para componentes legados
+export const GIL_DEFAULT_CANDIDATES: Candidate[] = generatePersonalColinha('coladagil').candidates;
 
 export const STORAGE_KEY = 'a_cola_da_gil_custom_v2';
 

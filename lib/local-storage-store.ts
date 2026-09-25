@@ -1,7 +1,7 @@
 'use client';
 
 import { useSyncExternalStore, useMemo } from 'react';
-import { Candidate, CampaignConfig, getDefaultCampaign } from './campaigns';
+import { Candidate, CampaignConfig, generatePersonalColinha } from './campaign-types';
 import { STORAGE_KEY } from './elections-data';
 
 // Custom event to notify storage changes across components and tabs
@@ -117,7 +117,7 @@ export function useCampaignCandidates(campaign: CampaignConfig) {
  * Retrocompatibilidade para chamadas sem parâmetros (usa A Cola da Gil)
  */
 export function useCandidates() {
-  const defaultCampaign = getDefaultCampaign();
-  const [candidates, setCandidates] = useCampaignCandidates(defaultCampaign);
+  const fallbackCampaign = generatePersonalColinha('coladagil');
+  const [candidates, setCandidates] = useCampaignCandidates(fallbackCampaign);
   return [candidates, setCandidates] as const;
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CampaignConfig, Candidate } from '@/lib/campaigns';
+import { CampaignConfig, Candidate } from '@/lib/campaign-types';
 import { useCampaignCandidates } from '@/lib/local-storage-store';
 import { HeaderNav } from '@/components/header-nav';
 import { CandidateCard } from '@/components/candidate-card';

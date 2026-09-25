@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Candidate, CampaignTheme } from '@/lib/campaigns';
+import { Candidate, CampaignTheme } from '@/lib/campaign-types';
 import { Edit3, Check, RotateCcw, AlertCircle, Star } from 'lucide-react';
 
 interface CandidateCardProps {

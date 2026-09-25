@@ -1,132 +1,129 @@
-import coladagilRaw from '@/data/campaigns/coladagil.json';
-import coladaandreiaRaw from '@/data/campaigns/coladaandreia.json';
-import coladomarcosRaw from '@/data/campaigns/coladomarcos.json';
+import fs from 'fs';
+import path from 'path';
+import {
+  Candidate,
+  CampaignConfig,
+  CampaignTheme,
+  normalizeCampaign,
+  generatePersonalColinha,
+} from './campaign-types';
 
-export interface Candidate {
-  id: string;
-  role: string;
-  roleShort: string;
-  order: number;
-  digits: number;
-  number: string;
-  name: string;
-  party: string;
-  badge?: string;
-  isMainHighlight?: boolean;
-  notes?: string;
-}
+export type { Candidate, CampaignConfig, CampaignTheme };
+export { normalizeCampaign, generatePersonalColinha };
 
-export interface CampaignTheme {
-  primary: string;
-  primaryHover: string;
-  lightBg: string;
-  border: string;
-}
-
-export interface CampaignConfig {
-  slug: string;
-  title: string;
-  slogan: string;
-  badge?: string;
-  description: string;
-  colors: CampaignTheme;
-  showPresident: boolean;
-  footerNote?: string;
-  candidates: Candidate[];
-}
-
-/**
- * Normaliza e valida a configuração de uma campanha.
- * Aplica a regra de showPresident: se false, remove automaticamente o Presidente.
- */
-function normalizeCampaign(raw: Record<string, unknown>): CampaignConfig {
-  const showPresident = Boolean(raw.showPresident);
-  const rawCandidates = Array.isArray(raw.candidates) ? (raw.candidates as Candidate[]) : [];
-
-  const filteredCandidates = rawCandidates.filter((c) => {
-    const isPresident =
-      c.id === 'presidente' ||
-      c.id === 'presidente-da-republica' ||
-      c.role?.toLowerCase().includes('presidente');
-
-    if (isPresident && !showPresident) {
-      return false;
-    }
-    return true;
-  });
-
-  // Ordena pela ordem oficial da urna (order)
-  filteredCandidates.sort((a, b) => a.order - b.order);
-
-  const colors = (raw.colors as Partial<CampaignTheme>) || {};
-
-  return {
-    slug: String(raw.slug || 'coladagil').toLowerCase(),
-    title: String(raw.title || 'A Cola da Gil'),
-    slogan: String(raw.slogan || 'A força da mulher'),
-    badge: raw.badge ? String(raw.badge) : undefined,
-    description: String(
-      raw.description ||
-        'Números para a urna eletrônica. Imprima sua colinha em papel para levar no dia do voto.'
-    ),
-    colors: {
-      primary: colors.primary || '#ff28b4',
-      primaryHover: colors.primaryHover || '#e01f9c',
-      lightBg: colors.lightBg || '#fdf2f8',
-      border: colors.border || '#fce7f3',
-    },
-    showPresident,
-    footerNote: raw.footerNote ? String(raw.footerNote) : undefined,
-    candidates: filteredCandidates,
-  };
-}
-
-// Registro estático das campanhas cadastradas
-const REGISTERED_CAMPAIGNS: Record<string, CampaignConfig> = {
-  coladagil: normalizeCampaign(coladagilRaw),
-  coladaandreia: normalizeCampaign(coladaandreiaRaw),
-  coladomarcos: normalizeCampaign(coladomarcosRaw),
-};
-
+const CAMPAIGNS_DIR = path.join(process.cwd(), 'data', 'campaigns');
 export const DEFAULT_CAMPAIGN_SLUG = 'coladagil';
 
 /**
- * Busca uma campanha pelo slug (case-insensitive).
- * Suporta sinônimos e alias comuns (ex: 'gil' -> 'coladagil', 'andreia' -> 'coladaandreia').
+ * Lê e carrega dinamicamente TODOS os arquivos .json da pasta data/campaigns/.
+ * Não é necessário importar manualmente um a um!
+ * Adicionar ou excluir um arquivo JSON na pasta tem efeito imediato e automático.
  */
-export function getCampaignBySlug(slug?: string | null): CampaignConfig | null {
-  if (!slug) return null;
-  const clean = slug.trim().toLowerCase();
+export function loadCampaignsFromDisk(): Record<string, CampaignConfig> {
+  const map: Record<string, CampaignConfig> = {};
 
-  if (REGISTERED_CAMPAIGNS[clean]) {
-    return REGISTERED_CAMPAIGNS[clean];
+  try {
+    if (fs.existsSync(CAMPAIGNS_DIR)) {
+      const files = fs.readdirSync(CAMPAIGNS_DIR);
+
+      for (const file of files) {
+        if (file.toLowerCase().endsWith('.json')) {
+          try {
+            const filePath = path.join(CAMPAIGNS_DIR, file);
+            const content = fs.readFileSync(filePath, 'utf-8');
+            const parsed = JSON.parse(content);
+
+            const fileSlug = file.replace(/\.json$/i, '').toLowerCase().trim();
+            const normalized = normalizeCampaign(parsed, fileSlug);
+
+            // Registra pelo slug definido no JSON e pelo nome do arquivo
+            map[normalized.slug] = normalized;
+            if (fileSlug !== normalized.slug) {
+              map[fileSlug] = normalized;
+            }
+
+            // Registra alias curto (ex: "coladadagmar" -> "dagmar", "coladaadriana" -> "adriana")
+            const shortAlias = normalized.slug
+              .replace(/^colada/, '')
+              .replace(/^colado/, '')
+              .replace(/^cola-da-/, '')
+              .replace(/^cola-do-/, '')
+              .replace(/^cola_da_/, '')
+              .replace(/^cola_do_/, '');
+
+            if (shortAlias && shortAlias !== normalized.slug && !map[shortAlias]) {
+              map[shortAlias] = normalized;
+            }
+          } catch (fileErr) {
+            console.error(`Erro ao carregar colinha de ${file}:`, fileErr);
+          }
+        }
+      }
+    }
+  } catch (dirErr) {
+    console.error('Erro ao ler pasta de campanhas:', dirErr);
   }
 
-  // Alias comuns amigáveis
-  if (clean === 'gil') return REGISTERED_CAMPAIGNS['coladagil'];
-  if (clean === 'andreia') return REGISTERED_CAMPAIGNS['coladaandreia'];
-  if (clean === 'marcos') return REGISTERED_CAMPAIGNS['coladomarcos'];
+  // Fallback de segurança para coladagil caso o arquivo não exista
+  if (!map[DEFAULT_CAMPAIGN_SLUG]) {
+    map[DEFAULT_CAMPAIGN_SLUG] = normalizeCampaign(
+      {
+        slug: DEFAULT_CAMPAIGN_SLUG,
+        title: 'A Cola da Gil Tavares',
+        slogan: 'Mulher em ação',
+        badge: 'Mulher em ação',
+        description:
+          'Números para a urna eletrônica. Imprima sua colinha em papel para levar no dia do voto.',
+        colors: {
+          primary: '#ff28b4',
+          primaryHover: '#e01f9c',
+          lightBg: '#fdf2f8',
+          border: '#fce7f3',
+        },
+        showPresident: false,
+      },
+      DEFAULT_CAMPAIGN_SLUG
+    );
+  }
 
-  return null;
+  return map;
 }
 
 /**
- * Retorna a campanha padrão (A Cola da Gil) para rota raiz `/`
+ * Busca uma campanha pelo slug.
+ * 1. Se encontrar na pasta data/campaigns/*.json, retorna os dados cadastrados daquele líder.
+ * 2. Se a pessoa digitar uma URL inexistente/personalizada:
+ *    Retorna automaticamente uma colinha gerada para ela criar a própria colinha,
+ *    salvando apenas no LocalStorage dela, sem saber que existem outras campanhas.
+ */
+export function getCampaignBySlug(slug?: string | null): CampaignConfig {
+  if (!slug) {
+    return getDefaultCampaign();
+  }
+
+  const clean = slug.trim().toLowerCase();
+  const campaigns = loadCampaignsFromDisk();
+
+  if (campaigns[clean]) {
+    return campaigns[clean];
+  }
+
+  // Se não existir, gera uma colinha pessoal para a pessoa criar a própria colinha
+  return generatePersonalColinha(clean);
+}
+
+/**
+ * Retorna a campanha padrão (A Cola da Gil Tavares) para a rota raiz `/`
  */
 export function getDefaultCampaign(): CampaignConfig {
-  return REGISTERED_CAMPAIGNS[DEFAULT_CAMPAIGN_SLUG];
+  const campaigns = loadCampaignsFromDisk();
+  return campaigns[DEFAULT_CAMPAIGN_SLUG] || generatePersonalColinha(DEFAULT_CAMPAIGN_SLUG);
 }
 
 /**
- * Retorna todas as campanhas cadastradas
- */
-export function getAllCampaigns(): CampaignConfig[] {
-  return Object.values(REGISTERED_CAMPAIGNS);
-}
-
-/**
- * Retorna a lista de todos os slugs válidos
+ * Retorna os slugs de todas as campanhas em disco para pré-renderização estática.
  */
 export function getAllCampaignSlugs(): string[] {
-  return Object.keys(REGISTERED_CAMPAIGNS);
+  const campaigns = loadCampaignsFromDisk();
+  return Object.keys(campaigns);
 }

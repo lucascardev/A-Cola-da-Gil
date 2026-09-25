@@ -1,11 +1,17 @@
-# Como Adicionar um Novo Líder de Campanha
+# Como Adicionar um Novo Líder de Campanha (100% Automático)
 
-Cada líder de campanha possui sua própria configuração individual em um arquivo JSON na pasta `/data/campaigns/`.
+Agora o carregamento de novas colinhas é **100% automático**.  
+Você **não precisa mexer em nenhum código TypeScript nem importar arquivos manualmente**.
 
-## Estrutura do Arquivo JSON
+Basta adicionar um arquivo `.json` dentro da pasta `/data/campaigns/`. O sistema reconhece e ativa a nova rota imediatamente!
 
-Basta criar um arquivo com o nome da rota desejada, por exemplo: `coladacarla.json`
+---
 
+## 1. Passo Único: Criar o arquivo JSON
+
+Crie um arquivo dentro de `/data/campaigns/` com o nome da colinha (ex: `coladacarla.json`).
+
+### Exemplo completo: `coladacarla.json`
 ```json
 {
   "slug": "coladacarla",
@@ -71,31 +77,22 @@ Basta criar um arquivo com o nome da rota desejada, por exemplo: `coladacarla.js
       "order": 5,
       "digits": 2,
       "number": "10",
-      "name": "Governador 10",
-      "party": "REPUBLICANOS"
-    },
-    {
-      "id": "presidente",
-      "role": "Presidente da República",
-      "roleShort": "Presidente",
-      "order": 6,
-      "digits": 2,
-      "number": "10",
-      "name": "Presidente 10",
+      "name": "Candidato a Governador",
       "party": "REPUBLICANOS"
     }
   ]
 }
 ```
 
-### Explicação dos Campos:
-- `slug`: Identificador da URL (ex: `coladacarla` gera `https://minhacola2026.netlify.app/coladacarla`)
-- `title`: O título principal exibido na colinha e no cabeçalho.
-- `slogan`: O slogan da campanha do líder.
-- `colors`:
-  - `primary`: Cor principal em hexadecimal (ex: `#ff28b4`, `#2563eb`, `#8b5cf6`).
-  - `primaryHover`: Cor ao passar o mouse ou focar.
-  - `lightBg`: Fundo suave dos cartões de destaque.
-  - `border`: Cor da borda suave.
-- `showPresident`: `true` ou `false`. Se for `false`, o cargo de Presidente não aparece na lista nem na impressão. Se for `true`, o Presidente é exibido com seus 2 dígitos.
-- `candidates`: Lista com os números e nomes oficiais.
+---
+
+## 2. Acesso Imediato
+
+Assim que o arquivo `coladacarla.json` é colocado na pasta:
+- A rota `https://coladagil.netlify.app/coladacarla` já abre a colinha da Carla com suas cores e candidatos.
+- O atalho amigável `https://coladagil.netlify.app/carla` também funciona automaticamente.
+
+## 3. Privacidade e Exclusividade Total
+- **Sem menus de outros líderes**: Cada página exibe apenas a colinha daquele líder. Ninguém sabe que outros líderes existem.
+- **URLs desconhecidas**: Se alguém acessar uma URL não cadastrada, o sistema abre uma colinha limpa e personalizada para a pessoa criar a sua própria colinha e imprimir, salvando no seu próprio navegador (`LocalStorage`).
+- **A Cola da Gil**: O link principal `https://coladagil.netlify.app/` continua sendo A Cola da Gil Tavares.
