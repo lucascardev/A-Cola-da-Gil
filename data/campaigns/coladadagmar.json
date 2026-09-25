@@ -2,8 +2,8 @@
   "slug": "coladadagmar",
   "title": "A Cola da Dagmar",
   "slogan": "Dagmar",
-  "badge": "Juntos por um Futuro Melhor",
-  "description": "Consulte e imprima os números de voto da Andréia para levar no dia da eleição.",
+  "badge": "Dagmar",
+  "description": "Consulte e imprima os números de voto da Dagmar para levar no dia da eleição.",
   "colors": {
     "primary": "#2563eb",
     "primaryHover": "#1d4ed8",
@@ -11,7 +11,7 @@
     "border": "#bfdbfe"
   },
   "showPresident": true,
-  "footerNote": "A cola da Andréia • Compromisso e Renovação • Andréia 1515 (Dep. Federal)",
+  "footerNote": "A cola da Dagmar • Elinaldo • Cibele 4478 (Dep. Federal)",
   "candidates": [
     {
       "id": "deputado-federal",
@@ -19,34 +19,34 @@
       "roleShort": "Dep. Federal",
       "order": 1,
       "digits": 4,
-      "number": "1515",
-      "name": "Andréia Santos",
-      "party": "MDB",
-      "badge": "Destaque Principal ★ A Força da Mudança",
+      "number": "4478",
+      "name": "Cibele de Teobaldo",
+      "party": "União Brasil",
+      "badge": "Destaque Principal ★ Mulher em ação",
       "isMainHighlight": true,
-      "notes": "Candidata de destaque da Andréia. Por mais saúde e educação."
+      "notes": "Candidata de destaque da Dagmar. Representante da força feminina."
     },
-    {
+     {
       "id": "deputado-estadual",
       "role": "Deputado Estadual",
       "roleShort": "Dep. Estadual",
       "order": 2,
       "digits": 5,
-      "number": "15123",
-      "name": "Marcos Silveira",
-      "party": "MDB",
-      "notes": "Voz ativa na Assembleia Legislativa."
+      "number": "44111",
+      "name": "Elinaldo",
+      "party": "União Brasil",
+      "notes": "Parceiro da Mudança"
     },
-    {
+      {
       "id": "senador-1",
       "role": "Senador (1ª Vaga)",
       "roleShort": "Senador 1",
       "order": 3,
       "digits": 3,
-      "number": "150",
-      "name": "Carlos Eduardo",
-      "party": "MDB",
-      "notes": "Defesa intransigente do nosso Estado."
+      "number": "100",
+      "name": "Angelo Coronel",
+      "party": "PSD",
+      "notes": "Primeiro voto para o Senado Federal."
     },
     {
       "id": "senador-2",
@@ -54,32 +54,21 @@
       "roleShort": "Senador 2",
       "order": 4,
       "digits": 3,
-      "number": "400",
-      "name": "Valéria Mendes",
-      "party": "PSB",
-      "notes": "Compromisso social e desenvolvimento sustentável."
+      "number": "222",
+      "name": "João Roma",
+      "party": "PL",
+      "notes": "Segundo voto para o Senado Federal."
     },
-    {
+     {
       "id": "governador",
       "role": "Governador",
       "roleShort": "Governador",
       "order": 5,
       "digits": 2,
-      "number": "13",
-      "name": "Jerônimo Rodrigues",
-      "party": "PT (Coligação Bahia pela Frente)",
-      "notes": "Avançando no desenvolvimento do Estado."
-    },
-    {
-      "id": "presidente",
-      "role": "Presidente da República",
-      "roleShort": "Presidente",
-      "order": 6,
-      "digits": 2,
-      "number": "13",
-      "name": "Luiz Inácio Lula da Silva",
-      "party": "PT",
-      "notes": "Eleição presidencial 2026."
+      "number": "44",
+      "name": "ACM Neto",
+      "party": "União Brasil (Vice Zé Coca)",
+      "notes": "Para transformar o governo do Estado."
     }
   ]
 }

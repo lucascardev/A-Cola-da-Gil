@@ -5,7 +5,7 @@
   "badge": "Adriana",
   "description": "Números para a urna eletrônica. Imprima sua colinha em papel para levar no dia do voto.",
   "colors": {
-    "primary": "#fff370",
+    "primary": "#ffe714",
     "primaryHover": "#ddcd1f",
     "lightBg": "#fff7a8",
     "border": "#fffdd8"
