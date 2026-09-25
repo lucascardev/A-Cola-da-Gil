@@ -68,9 +68,11 @@ export const ColaPageView: React.FC<ColaPageViewProps> = ({ campaign }) => {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 pb-20 sm:pb-12">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 pb-20 sm:pb-12 print:min-h-0 print:bg-white print:p-0 print:m-0 print:pb-0">
       {/* Offline Status Indicator */}
-      <OfflineIndicator />
+      <div className="print:hidden">
+        <OfflineIndicator />
+      </div>
 
       {/* Main App Navigation */}
       <HeaderNav
@@ -80,7 +82,7 @@ export const ColaPageView: React.FC<ColaPageViewProps> = ({ campaign }) => {
         isAnyModified={isAnyModified}
       />
 
-      <main className="flex-1 max-w-3xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+      <main className="flex-1 max-w-3xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 space-y-6 print:hidden">
         {/* Simple & Focused Top Banner */}
         <section
           className="bg-white rounded-3xl border shadow-xs p-5 sm:p-7 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-5 transition-all"

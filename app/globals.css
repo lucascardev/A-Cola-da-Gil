@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@media print {
+  @page {
+    size: portrait;
+    margin: 8mm 10mm;
+  }
+
+  html,
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Oculta tudo que não for a colinha impressa */
+  header,
+  main,
+  footer,
+  nav,
+  #main-app-header,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Garante que a colinha não quebre entre páginas */
+  .print-avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
